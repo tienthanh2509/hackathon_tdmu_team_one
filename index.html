@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+	<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <title></title>
+  </head>
+  <body>
+	<div id="top">Welcome to Index</div>
+	
+
+	<form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+	
+	<div id="mapholder"></div>
+	 
+   <script>
+    $(document).ready(function(){
+      var socket = io.connect();
+	  
+	  socket.on('server-gui-bando', function (data) {
+		 showPosition(data.x, data.y);
+	  });
+	  
+	 
+	 
+	  function showPosition(latitude, longitude) {
+		if(typeof latitude == "undefined" || typeof latitude == "undefined") {
+			console.log("Vị trí nhập vào không hợp lệ!");
+		}
+
+		latlon = new google.maps.LatLng(latitude, longitude)
+		mapholder = document.getElementById('mapholder')
+		mapholder.style.height = '350px';
+		mapholder.style.width = '100%';
+
+		var myOptions = {
+			center: latlon,
+			zoom: 15,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeControl: false,
+			navigationControlOptions: {
+				style: google.maps.NavigationControlStyle.SMALL
+			}
+		};
+		var map = new google.maps.Map(document.getElementById('mapholder'), myOptions);
+		var marker = new google.maps.Marker({
+			position: latlon,
+			map: map,
+			title: 'Vị trí khẩn cấp'
+		});
+	  }
+    });
+    </script>
+   
+  </body>
+</html>
