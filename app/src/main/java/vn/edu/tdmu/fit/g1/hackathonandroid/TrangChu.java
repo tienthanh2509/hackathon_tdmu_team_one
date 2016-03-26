@@ -8,8 +8,8 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -41,53 +41,6 @@ public class TrangChu extends AppCompatActivity {
     private MediaRecorder myRecorder;
     private MediaPlayer myPlayer;
     private String outputFile = null;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trang_chu);
-
-        st = ((StarterApplication)getApplicationContext());
-        mSocket = st.getmSocket();
-
-        mSocket.off("server-gui-noidung");
-        mSocket.on("server-gui-noidung", LayNoiDung);
-
-        mSocket.off("server-gui-thongbao");
-        mSocket.on("server-gui-thongbao", ThongBao);
-
-        mSocket.emit("client-yeucau-noidung", "abc");
-
-        btnDangXuat = (Button)findViewById(R.id.buttonDangXuat);
-        btnDangXuat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSocket.off("server-gui-noidung");
-                mSocket.off("server-gui-thongbao");
-                db.DB_QueryData("DELETE FROM khachhang");
-                Intent mhMain = new Intent(TrangChu.this, MainActivity.class);
-                startActivity(mhMain);
-                finish();
-            }
-        });
-
-        lvTrangChu = (ListView)findViewById(R.id.listViewTrangChu);
-        lvTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ThongBao item = (ThongBao) parent.getItemAtPosition(position);
-                if(myPlayer!=null && myPlayer.isPlaying()){
-                    myPlayer.release();
-                    myPlayer=null;
-                }
-                byte[] amthanh=item.amthanh;
-                if(amthanh.length>50)
-                    playMp3FromByte(amthanh);
-
-            }
-        });
-    }
-
     private Emitter.Listener LayNoiDung = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -111,7 +64,7 @@ public class TrangChu extends AppCompatActivity {
                             mangThongBao.add(new ThongBao(row_js.getString("id"), row_js.getString("noidung"), hinh, amthanh, row_js.getString("thoigian"), row_js.getString("status")));
                         }
 
-                        ThongBaoAdapter adapter = new ThongBaoAdapter(getApplicationContext(),R.layout.activity_dong_thong_bao,mangThongBao);
+                        ThongBaoAdapter adapter = new ThongBaoAdapter(getApplicationContext(), R.layout.activity_dong_thong_bao, mangThongBao);
                         lvTrangChu.setAdapter(adapter);
 
                     } catch (JSONException e) {
@@ -121,7 +74,6 @@ public class TrangChu extends AppCompatActivity {
             });
         }
     };
-
     private Emitter.Listener ThongBao = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -130,12 +82,12 @@ public class TrangChu extends AppCompatActivity {
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
 
-                    Intent intent = new Intent(getApplicationContext(),TrangChu.class);
+                    Intent intent = new Intent(getApplicationContext(), TrangChu.class);
 
                     PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext(), (int) System.currentTimeMillis(), intent, 0);
                     Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-                    Notification n  = new Notification.Builder(getApplicationContext())
+                    Notification n = new Notification.Builder(getApplicationContext())
                             .setContentTitle("Thông báo khẩn cấp")
                             .setContentText("Bạn nhận được một thông báo khẩn cấp")
                             .setSmallIcon(R.mipmap.ic_launcher)
@@ -152,6 +104,52 @@ public class TrangChu extends AppCompatActivity {
             });
         }
     };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_trang_chu);
+
+        st = ((StarterApplication) getApplicationContext());
+        mSocket = st.getmSocket();
+
+        mSocket.off("server-gui-noidung");
+        mSocket.on("server-gui-noidung", LayNoiDung);
+
+        mSocket.off("server-gui-thongbao");
+        mSocket.on("server-gui-thongbao", ThongBao);
+
+        mSocket.emit("client-yeucau-noidung", "abc");
+
+        btnDangXuat = (Button) findViewById(R.id.buttonDangXuat);
+        btnDangXuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSocket.off("server-gui-noidung");
+                mSocket.off("server-gui-thongbao");
+                db.DB_QueryData("DELETE FROM khachhang");
+                Intent mhMain = new Intent(TrangChu.this, MainActivity.class);
+                startActivity(mhMain);
+                finish();
+            }
+        });
+
+        lvTrangChu = (ListView) findViewById(R.id.listViewTrangChu);
+        lvTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ThongBao item = (ThongBao) parent.getItemAtPosition(position);
+                if (myPlayer != null && myPlayer.isPlaying()) {
+                    myPlayer.release();
+                    myPlayer = null;
+                }
+                byte[] amthanh = item.amthanh;
+                if (amthanh.length > 50)
+                    playMp3FromByte(amthanh);
+
+            }
+        });
+    }
 
     private void playMp3FromByte(byte[] mp3SoundByteArray) {
         try {

@@ -10,42 +10,42 @@
     tools:context="vn.edu.tdmu.fit.g1.hackathonandroid.DangNhap">
 
     <EditText
+        android:id="@+id/editTextEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/editTextEmail"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:maxLength="100"
-        android:hint="Nhập email" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="Nhập email"
+        android:inputType="textEmailAddress"
+        android:maxLength="100" />
 
     <EditText
+        android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextPassword"
-        android:layout_below="@+id/editTextEmail"
+        android:layout_alignEnd="@+id/editTextEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/editTextEmail"
-        android:layout_alignEnd="@+id/editTextEmail"
-        android:maxLength="50"
-        android:hint="Nhập mật khẩu" />
+        android:layout_below="@+id/editTextEmail"
+        android:ems="10"
+        android:hint="Nhập mật khẩu"
+        android:inputType="textPassword"
+        android:maxLength="50" />
 
     <Button
+        android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đăng nhập"
-        android:id="@+id/buttonLogin"
-        android:layout_below="@+id/editTextPassword"
+        android:layout_alignEnd="@+id/editTextPassword"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/editTextPassword"
-        android:layout_alignEnd="@+id/editTextPassword" />
+        android:layout_below="@+id/editTextPassword"
+        android:text="Đăng nhập" />
 
 </RelativeLayout>

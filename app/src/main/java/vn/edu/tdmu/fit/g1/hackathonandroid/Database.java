@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by NguyenHuyLinh on 3/26/2016.
  */
 public class Database extends SQLiteOpenHelper {
-    public Database(Context context){
-        super(context,"hackathon.sqlite",null,1);
+    public Database(Context context) {
+        super(context, "hackathon.sqlite", null, 1);
     }
 
     @Override
@@ -19,13 +19,13 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    public Cursor DB_GetData(String sql){
+    public Cursor DB_GetData(String sql) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(sql, null);
         return c;
     }
 
-    public void DB_QueryData(String sql){
+    public void DB_QueryData(String sql) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(sql);
     }

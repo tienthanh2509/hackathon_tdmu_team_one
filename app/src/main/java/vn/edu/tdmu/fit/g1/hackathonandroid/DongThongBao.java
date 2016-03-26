@@ -1,7 +1,7 @@
 package vn.edu.tdmu.fit.g1.hackathonandroid;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class DongThongBao extends AppCompatActivity {
 

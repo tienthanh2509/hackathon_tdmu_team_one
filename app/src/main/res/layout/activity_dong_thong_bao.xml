@@ -3,26 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="5dp"
     android:paddingBottom="5dp"
+    android:paddingTop="5dp"
     tools:context="vn.edu.tdmu.fit.g1.hackathonandroid.DongThongBao">
 
     <ImageView
+        android:id="@+id/imageViewTB"
         android:layout_width="208dp"
         android:layout_height="117dp"
-        android:id="@+id/imageViewTB"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
     <TextView
         android:id="@+id/textViewNoiDung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Noi dung"
-        android:textColor="#0000ff"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/imageViewTB"
         android:layout_toRightOf="@+id/imageViewTB"
-        android:layout_toEndOf="@+id/imageViewTB" />
+        android:text="Noi dung"
+        android:textColor="#0000ff" />
 
 </RelativeLayout>
