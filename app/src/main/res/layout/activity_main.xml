@@ -17,7 +17,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Khẩn cấp" />
+        android:text="@string/emergency" />
 
     <ImageView
         android:id="@+id/imageViewTemp"
@@ -36,5 +36,5 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Đăng Nhập" />
+        android:text="@string/login" />
 </RelativeLayout>
