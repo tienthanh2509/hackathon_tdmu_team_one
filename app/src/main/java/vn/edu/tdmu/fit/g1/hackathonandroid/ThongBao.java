@@ -6,14 +6,18 @@ package vn.edu.tdmu.fit.g1.hackathonandroid;
 public class ThongBao {
     public String id;
     public String noidung;
+    public String kinhdo;
+    public String vido;
     public byte[] data;
     public byte[] amthanh;
     public String thoigian;
     public String status;
 
-    public ThongBao(String id, String noidung, byte[] data, byte[] amthanh, String thoigian, String status) {
+    public ThongBao(String id, String noidung, String kinhdo, String vido, byte[] data, byte[] amthanh, String thoigian, String status) {
         this.id = id;
         this.noidung = noidung;
+        this.kinhdo = kinhdo;
+        this.vido = vido;
         this.data = data;
         this.amthanh = amthanh;
         this.thoigian = thoigian;

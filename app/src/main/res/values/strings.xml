@@ -3,4 +3,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="login">Đăng Nhập</string>
     <string name="emergency">Khẩn cấp</string>
+
+    <string name="basic_map_demo_label">Basic Map</string>
 </resources>

@@ -54,14 +54,17 @@ public class TrangChu extends AppCompatActivity {
                         //Toast.makeText(getApplicationContext(),"nhan data",Toast.LENGTH_SHORT).show();
                         noidung = data.getJSONArray("noidung");
                         byte[] hinh, amthanh;
+                        String kinhdo,vido;
                         JSONObject row_js;
                         for (int i = 0; i < noidung.length(); i++) {
                             row_js = noidung.getJSONObject(i);
 
+                            kinhdo = row_js.getString("kinhdo");
+                            vido = row_js.getString("vido");
                             hinh = (byte[]) row_js.get("data");
                             amthanh = (byte[]) row_js.get("amthanh");
 
-                            mangThongBao.add(new ThongBao(row_js.getString("id"), row_js.getString("noidung"), hinh, amthanh, row_js.getString("thoigian"), row_js.getString("status")));
+                            mangThongBao.add(new ThongBao(row_js.getString("id"), row_js.getString("noidung"), kinhdo, vido, hinh, amthanh, row_js.getString("thoigian"), row_js.getString("status")));
                         }
 
                         ThongBaoAdapter adapter = new ThongBaoAdapter(getApplicationContext(), R.layout.activity_dong_thong_bao, mangThongBao);
@@ -139,6 +142,7 @@ public class TrangChu extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ThongBao item = (ThongBao) parent.getItemAtPosition(position);
+
                 if (myPlayer != null && myPlayer.isPlaying()) {
                     myPlayer.release();
                     myPlayer = null;
@@ -146,6 +150,16 @@ public class TrangChu extends AppCompatActivity {
                 byte[] amthanh = item.amthanh;
                 if (amthanh.length > 50)
                     playMp3FromByte(amthanh);
+
+                Double kd, vd;
+                kd = Double.parseDouble(item.kinhdo);
+                vd = Double.parseDouble(item.vido);
+
+                Intent mhBanDo = new Intent(TrangChu.this,BanDo.class);
+                mhBanDo.putExtra("kinhdo",kd);
+                mhBanDo.putExtra("vido",vd);
+                startActivity(mhBanDo);
+
 
             }
         });
