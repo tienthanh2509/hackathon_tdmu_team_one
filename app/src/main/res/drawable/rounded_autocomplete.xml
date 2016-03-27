@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><!--<shape xmlns:android="http://schemas.android.com/apk/res/android">--><!--<stroke--><!--android:width="0.5dp"--><!--android:color="@color/colorPrimaryDark" />--><!--<solid android:color="@android:color/white" />--><!--<padding--><!--android:bottom="5dp"--><!--android:left="20dp"--><!--android:right="20dp"--><!--android:top="5dp" />-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" android:drawable="@drawable/rounded_autocomplete_focus"/>
+    <item android:drawable="@drawable/rounded_autocomplete_outed"/>
+</selector>
